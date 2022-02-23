@@ -1,0 +1,74 @@
+spring:
+  session:
+    store-type: mongodb
+  jackson:
+    serialization.write_dates_as_timestamps: false
+    time-zone: Europe/Istanbul
+  jpa:
+    open-in-view: false
+  messages:
+    basename: i18n/messages
+  datasource:
+    sqlScriptEncoding: UTF-8
+  mail:
+    host: mail.empera.com
+    port: 587
+    username: carp@empera.com
+    password: C@arp1923*
+    default-encoding: UTF-8
+    protocol: smtp
+    properties:
+      mail:
+        smptp:
+          auth: true
+          starttls:
+            enable: true
+  liquibase:
+    enabled: false
+  h2:
+    console:
+      enabled: false
+  cache:
+    type: none
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: carp
+      username: aova
+      password: JimBom05_
+      authentication-database: admin
+management:
+  health:
+    mail:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+debug: false
+trace: false
+logging:
+  level:
+    root: warn
+    org:
+      springframework:
+        security: warn
+        web: warn
+        data:
+          mongodb:
+            core:
+              MongoTemplate: warn
+      hibernate:
+        SQL: warn
+        type: warn
+      apache:
+        commons:
+          dbcp2: warn
+    com:
+      zaxxer:
+        hikari:
+          pool:
+            HikariPool: warn
+            PoolBase: warn
+          HikariDataSource: warn

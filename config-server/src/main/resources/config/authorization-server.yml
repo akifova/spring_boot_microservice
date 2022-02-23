@@ -1,0 +1,16 @@
+server:
+  port: 8091
+keycloak:
+  server:
+    contextPath: /auth
+    adminUser:
+      username: kazu
+      password: JimBom05@
+    realmImportFile: kazu-realm.json
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: INFO
+#    org.springframework.boot.autoconfigure: DEBUG

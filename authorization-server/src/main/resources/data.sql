@@ -1,0 +1,4 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+INSERT INTO sec.user_role (id, insert_date, is_active, saves_user, authority, description, lang_param, form_lang_param, module_lang_param) VALUES ('5e0ccf71-9915-4bc0-ad46-200607517f1c', now(), 1, 'kazu', 'ADMIN', 'Sistem Yöneticisi', 'role.lang.param.admin', 'role.lang.param.admin', 'role.lang.param.admin');
+INSERT INTO sec.user_account (id, insert_date, is_active, saves_user, name, password, surname, email) VALUES ('309f568c-7f1f-4607-a77c-4e3770effc5e', now(), 1, 'system', 'Kazu', '$2a$10$2WyejSBCMbyPa.Z6Od3FNOLqnJm3Qtex6IjbRuZ5DPl6ejzWM6w1.', 'Team', 'akif.ova@gmail.com');
+INSERT INTO sec.user_authorization (id, insert_date, is_active, saves_user, user_role, user_account) VALUES ('4b6174c5-07ad-4bd4-8e6b-b39e8f894f5c', now(), 1, 'system', '5e0ccf71-9915-4bc0-ad46-200607517f1c', '309f568c-7f1f-4607-a77c-4e3770effc5e');

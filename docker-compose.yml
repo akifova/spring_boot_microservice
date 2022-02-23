@@ -1,0 +1,69 @@
+version: '3.5'
+
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-JimBom05@}
+      PGDATA: /data/postgres
+    volumes:
+      - /Users/akifova/Development/db/postgres/data/:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-akif.ova@gmail.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-JimBom05@}
+    volumes:
+      - pgadmin:/root/.pgadmin
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+  redis:
+    container_name: redis_container
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass JimBom05@
+    networks:
+      - redis
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_container
+    hostname: mongodb
+    volumes:
+      - /Users/akifova/Development/db/mongo/config/mongod.conf:/etc/mongod.conf
+      - /Users/akifova/Development/db/mongo/home/:/home/mongodb
+      - /Users/akifova/Development/db/mongo/config/initdb.d:/docker-entrypoint-initdb.d/
+      - /Users/akifova/Development/db/mongo/data/:/data/db/
+      - /Users/akifova/Development/db/mongo/log/:/var/log/mongodb/
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-aova}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-JimBom05_}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE:-carp}
+      MONGO_INITDB_USERNAME: ${MONGO_INITDB_USERNAME:-carp}
+      MONGO_INITDB_PASSWORD: ${MONGO_INITDB_PASSWORD:-JimBom05_}
+      MONGO_REPLICA_SET_NAME: ${MONGO_REPLICA_SET_NAME:-rs0}
+    ports:
+      - "27017:27017"
+    command: [ "-f", "/etc/mongod.conf" ]
+networks:
+  postgres:
+    driver: bridge
+  redis:
+    driver: bridge
+volumes:
+  postgres:
+  pgadmin:
+  #command: bash -c "echo \"host all  all  0.0.0.0/0  md5\" >> /etc/postgresql/9.3/main/pg_hba.conf && echo \"listen_addresses='*'\" >> /etc/postgresql/9.3/main/postgresql.conf"
+

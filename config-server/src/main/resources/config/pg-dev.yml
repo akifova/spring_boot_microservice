@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/carp_dev?useUnicode=true&characterEncoding=utf8&
+    username: postgres
+    password: JimBom05@
+  jpa:
+    hibernate:
+      ddl-auto: update

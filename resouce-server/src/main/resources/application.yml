@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: resource-server,common,pg,eureka
+  cloud:
+    config:
+      uri: http://localhost:8082
+      profile: dev
+  config:
+    import: configserver:http://localhost:8082
